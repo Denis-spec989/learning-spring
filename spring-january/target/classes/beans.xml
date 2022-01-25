@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class ="d.spring.xml.Computer">
+        <property name="cpu" ref="staticFactoryCPU"/>
+        <constructor-arg name="memoryList" >
+            <list>
+                <ref bean="sony"/>
+                <ref bean="kingston1"/>
+                <ref bean="kingston2"/>
+            </list>
+        </constructor-arg>
+        <constructor-arg name="storageList">
+            <list>
+                <ref bean="wd"/>
+                <ref bean="seagate"/>
+            </list>
+        </constructor-arg>
+        <property name="screen" ref="philips"/>
+    </bean>
+
+    <bean id="staticFactoryCPU" class="d.spring.xml.StaticCPUFactory" factory-method="createCPU">
+        <constructor-arg name="name" value="Intel"/>
+    </bean>
+    <bean class="d.spring.xml.AmdCPU" id="amd"/>
+    <bean class="d.spring.xml.IntelCPU" id="intel"/>
+    <bean class ="d.spring.xml.SonyMemory" id="sony"/>
+    <bean class ="d.spring.xml.KingstonMemory" id="kingston1"/>
+    <bean class ="d.spring.xml.KingstonMemory" id="kingston2"/>
+    <bean class ="d.spring.xml.PhilipsScreen" id="philips"/>
+    <bean class ="d.spring.xml.WDStorage" id="wd"/>
+    <bean class ="d.spring.xml.SeaGateStorage" id="seagate"/>
+
+
+
+</beans>
