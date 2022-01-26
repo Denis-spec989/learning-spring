@@ -13,8 +13,10 @@ public class JavaConfigApp
     {
         ApplicationContext ctx = new AnnotationConfigApplicationContext(Config.class);
         System.out.println(Arrays.toString(ctx.getBeanDefinitionNames()));
-        Computer computer = (Computer)ctx.getBean("MyComputer");
+        Computer computer = ctx.getBean(Computer.class);
         System.out.println("CPU-"+computer.getCpu().getVendor());
         System.out.println("Memory-"+computer.getMemoryList().stream().map(Device::getVendor).collect(Collectors.joining(", ")));
+        System.out.println("Screen-"+computer.getScreen().getVendor());
+        System.out.println("Storage-"+computer.getStorageList().stream().map(d.spring.xml.Device::getVendor).collect(Collectors.joining(", ")));
     }
 }

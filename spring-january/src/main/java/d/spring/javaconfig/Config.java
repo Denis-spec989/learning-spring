@@ -9,31 +9,55 @@ import java.util.List;
 @Configuration
 public class Config
 {
-    @Bean("MyComputer")
+    @Bean()
     public Computer computer()
     {
         Computer c = new Computer();
-        c.setCpu(intel());
+        c.setCpu(amd());
         c.setMemoryList(List.of(sony(),kingston(),sony()));
+        c.setScreen(philips());
+        c.setStorageList(List.of(seagate(),seagate()));
         return c;
     }
+  @Bean
+  public CPU intel()
+  {
+      return new IntelCPU();
+  }
+  @Bean
+  public CPU amd()
+  {
+      return new AmdCPU();
+  }
+  @Bean
+  public Memory sony()
+  {
+      return new SonyMemory();
+  }
+  @Bean
+    public Memory kingston()
+  {
+      return new KingstonMemory();
+  }
+  @Bean
+    public Screen dell()
+  {
+      return new DellScreen();
+  }
+  @Bean
+  public Screen philips()
+  {
+      return new PhilipsScreen();
+  }
+  @Bean
+    public Storage seagate()
+  {
+      return new SeaGateStorage();
+  }
     @Bean
-    public CPU intel(){
-        return new IntelCPU();
-    }
-    @Bean
-    public CPU amd()
+    public Storage wd()
     {
-        return new AmdCPU();
-    }
-    @Bean
-    @Scope("prototype")
-    public Memory sony(){
-        return new SonyMemory();
-    }
-    @Bean
-    public Memory kingston(){
-        return new KingstonMemory();
+        return new WDStorage();
     }
 
 }
