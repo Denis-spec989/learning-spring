@@ -1,8 +1,9 @@
 package d.spring.annotation;
 
-public class AmdCPU implements CPU
-{
+import org.springframework.stereotype.Component;
 
+@Component("amd")
+public class AmdCPU implements CPU {
     @Override
     public String getVendor() {
         return "AMD";

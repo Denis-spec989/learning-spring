@@ -1,6 +1,7 @@
 package d.spring.annotation;
 
-public interface Device
-{
+public interface Device {
+
     String getVendor();
+
 }

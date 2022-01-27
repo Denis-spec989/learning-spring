@@ -1,6 +1,6 @@
 package d.spring.annotation;
 
-public interface CPU extends Device
-{
+public interface CPU extends Device {
+
 
 }

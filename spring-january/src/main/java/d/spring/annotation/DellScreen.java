@@ -2,10 +2,10 @@ package d.spring.annotation;
 
 import org.springframework.stereotype.Component;
 
-@Component
-public class KingstonMemory implements Memory {
+@Component("dell")
+public class DellScreen implements Screen {
     @Override
     public String getVendor() {
-        return "Kingston";
+        return "Dell";
     }
 }
