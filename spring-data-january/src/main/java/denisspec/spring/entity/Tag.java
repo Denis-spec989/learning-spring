@@ -11,7 +11,7 @@ public class Tag {
     private Long tagId;
 
     private String name;
-
+    @ManyToMany(mappedBy = "tags")
     private List<Post> posts;
 
     public Long getTagId() {

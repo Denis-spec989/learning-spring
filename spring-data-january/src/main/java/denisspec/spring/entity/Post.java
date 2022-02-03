@@ -10,21 +10,26 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="post_id")
-     Long postId;
+     private Long postId;
 
-     String title;
+     private String title;
     @ManyToMany
     @JoinTable(
             name = "post_tag",
-            joinColumns = @JoinColumn(name="post_id")
+            joinColumns = @JoinColumn(name="post_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+
     )
     private List<Tag> tags;
 
-     String content;
+    @OneToMany(mappedBy = "post")
+    private List<Comment> comments;
+
+    private String content;
     @Column(name="dt_created")
-     LocalDateTime dtCreated;
+    private LocalDateTime dtCreated;
     @Column(name="dt_updated")
-     LocalDateTime dtUpdated;
+     private LocalDateTime dtUpdated;
 
     public Long getPostId() {
         return postId;
@@ -64,5 +69,21 @@ public class Post {
 
     public void setDtUpdated(LocalDateTime dtUpdated) {
         this.dtUpdated = dtUpdated;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

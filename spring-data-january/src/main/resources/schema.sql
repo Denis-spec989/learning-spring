@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS post_tag;
+DROP TABLE IF EXISTS comment;
 DROP TABLE IF EXISTS tag;
 DROP TABLE IF EXISTS post;
 
@@ -15,6 +16,15 @@ CREATE TABLE tag (
 tag_id bigserial PRIMARY KEY,
 name varchar(50) NOT NULL
 );
+
+CREATE TABLE comment (
+comment_id bigserial PRIMARY KEY,
+post_id bigint REFERENCES post(post_id) ON DELETE CASCADE,
+content text,
+dt_created timestamp,
+dt_updated timestamp
+);
+
 
 CREATE TABLE post_tag (
 post_id bigint REFERENCES post(post_id) ON DELETE CASCADE,
@@ -46,4 +56,21 @@ insert into post_tag(post_id, tag_id) values (2, 5);
 insert into post_tag(post_id, tag_id) values (3, 3);
 insert into post_tag(post_id, tag_id) values (3, 2);
 insert into post_tag(post_id, tag_id) values (3, 6);
+
+insert into comment (post_id, content, dt_created)
+    values (2, 'Nice!', current_timestamp);
+insert into comment (post_id, content, dt_created)
+    values (1, 'Awesome!', current_timestamp);
+insert into comment (post_id, content, dt_created)
+    values (1, 'Excellent!', current_timestamp);
+insert into comment (post_id, content, dt_created)
+    values (1, 'Wonderful!', current_timestamp);
+insert into comment (post_id, content, dt_created)
+    values (3, 'Disgusting!', current_timestamp);
+insert into comment (post_id, content, dt_created)
+    values (3, 'Atrocious!', current_timestamp);
+
 select * from post;
+select * from tag;
+select * from post_tag;
+select * from comment;

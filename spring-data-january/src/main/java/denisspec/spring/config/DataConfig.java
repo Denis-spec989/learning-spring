@@ -4,6 +4,7 @@ package denisspec.spring.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
@@ -20,6 +21,7 @@ import java.util.Properties;
 @Configuration
 @ComponentScan({"denisspec.spring.dao.jdbc","denisspec.spring.dao.jpa"})
 @EnableTransactionManagement
+@EnableJpaRepositories("denisspec.spring.dao.repository")
 public class DataConfig {
 
         private static final String URL = "jdbc:postgresql://localhost:5432/postgres";
