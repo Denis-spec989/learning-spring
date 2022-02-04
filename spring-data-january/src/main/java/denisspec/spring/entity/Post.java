@@ -12,13 +12,16 @@ public class Post {
     @Column(name="post_id")
      private Long postId;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private Userm usermp;
+
      private String title;
     @ManyToMany
     @JoinTable(
             name = "post_tag",
-            joinColumns = @JoinColumn(name="post_id"),
+            joinColumns = @JoinColumn(name = "post_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id")
-
     )
     private List<Tag> tags;
 
