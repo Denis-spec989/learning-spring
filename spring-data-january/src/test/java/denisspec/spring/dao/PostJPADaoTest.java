@@ -2,6 +2,7 @@ package denisspec.spring.dao;
 
 import denisspec.spring.config.DataConfig;
 import denisspec.spring.entity.Post;
+import denisspec.spring.entity.Userm;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,15 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @Sql(scripts = "classpath:schema.sql",executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Transactional
 public class PostJPADaoTest {
+
     private final AbstractDAO<Post> postDao;
 
+    private final AbstractDAO<Userm> userDao;
+
     @Autowired
-    public PostJPADaoTest(AbstractDAO<Post> postDao) {
+    public PostJPADaoTest(AbstractDAO<Post> postDao, AbstractDAO<Userm> userDao) {
         this.postDao = postDao;
+        this.userDao = userDao;
     }
     @Test
     void create(){
@@ -33,8 +38,8 @@ public class PostJPADaoTest {
         post.setTitle("Day 4");
         post.setContent("All is ok again");
         post.setDtCreated(LocalDateTime.now());
+        post.setUserm(userDao.getById(1L));
         postDao.create(post);
-
                assertEquals("Day 4",postDao.getById(4).getTitle());
     }
     @Test
@@ -53,13 +58,13 @@ public class PostJPADaoTest {
         assertEquals(2,postDao.getAll().size());
     }
 
-    @Test
-    void postTagComment()
-    {
-        Post post = postDao.getById(1);
-        assertEquals(3,post.getComments().size());
-        assertEquals(2,post.getTags().size());
-    }
+//    @Test
+//    void postTagComment()
+//    {
+//        Post post = postDao.getById(1);
+//        assertEquals(3,post.getComments().size());
+//        assertEquals(2,post.getTags().size());
+//    }
 
 
 

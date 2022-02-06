@@ -12,9 +12,11 @@ public class Post {
     @Column(name="post_id")
      private Long postId;
 
+
+
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private Userm usermp;
+    private Userm userm;
 
      private String title;
     @ManyToMany
@@ -33,6 +35,22 @@ public class Post {
     private LocalDateTime dtCreated;
     @Column(name="dt_updated")
      private LocalDateTime dtUpdated;
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public Userm getUserm() {
+        return userm;
+    }
+
+    public void setUserm(Userm userm) {
+        this.userm = userm;
+    }
 
     public Long getPostId() {
         return postId;
@@ -82,11 +100,11 @@ public class Post {
         this.tags = tags;
     }
 
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
+//    public List<Comment> getComments() {
+//        return comments;
+//    }
+//
+//    public void setComments(List<Comment> comments) {
+//        this.comments = comments;
+//    }
 }

@@ -1,6 +1,7 @@
 package denisspec.spring.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Role {
@@ -10,13 +11,16 @@ public class Role {
     private Long roleId;
 
     private String name;
-    @ManyToOne
-    @JoinTable(
-            name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Userm userm;
+    @ManyToMany(mappedBy = "roles")
+    private List<Userm> userm;
+
+    public List<Userm> getUserm() {
+        return userm;
+    }
+
+    public void setUserm(List<Userm> userm) {
+        this.userm = userm;
+    }
 
     public Long getRoleId() {
         return roleId;

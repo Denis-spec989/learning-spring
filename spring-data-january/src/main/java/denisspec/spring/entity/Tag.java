@@ -14,6 +14,14 @@ public class Tag {
     @ManyToMany(mappedBy = "tags")
     private List<Post> posts;
 
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
     public Long getTagId() {
         return tagId;
     }

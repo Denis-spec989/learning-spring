@@ -8,12 +8,12 @@ DROP TABLE IF EXISTS userm;
 
 CREATE TABLE userm (
     user_id bigserial PRIMARY KEY,
-    username varchar(20) NOT NULL,
+    username varchar(20) NOT NULL unique,
     password varchar(20) NOT NULL,
     first_name varchar(30) NOT NULL,
     last_name varchar(30) NOT NULL,
-    d_created date NOT NULL,
-    is_active boolean
+    d_created timestamp NOT NULL,
+    is_active boolean DEFAULT FALSE
 );
 
 CREATE TABLE post (
@@ -53,16 +53,16 @@ name varchar(50) NOT NULL
 );
 
 CREATE TABLE user_role (
-user_id bigint REFERENCES userm(user_id)ON DELETE CASCADE,
-role_id bigint REFERENCES role(role_id),
-PRIMARY KEY(role_id, user_id)
+user_id bigint REFERENCES userm(user_id) ON DELETE CASCADE,
+role_id bigint REFERENCES role(role_id) ON DELETE CASCADE,
+PRIMARY KEY(user_id, role_id)
 );
 
 ---
     insert into userm(username,password,first_name,last_name,d_created,is_active)
-    values ('Denisspec','1234R','Denis','Ignatov',current_date,'true' );
+    values ('Denisspec','1234R','Denis','Ignatov',current_timestamp ,'true' );
         insert into userm(username,password,first_name,last_name,d_created,is_active)
-    values ('AleshaPopovich57','AlechaPopovich1','Evgenii','Jmihov',current_date,'false' );
+    values ('AleshaPopovich57','AlechaPopovich1','Evgenii','Jmihov',current_timestamp ,'false' );
 
 insert into post (user_id,title, content, dt_created, dt_updated)
 	values (1,'Day 1', 'It''s all good!', current_timestamp - interval '2 days', null);
@@ -91,26 +91,25 @@ insert into post_tag(post_id, tag_id) values (3, 6);
 
 
 insert into comment (user_id,post_id, content, dt_created)
-    values (1,2, 'Nice!', current_timestamp);
+    values (1, 2, 'Nice!', current_timestamp);
 insert into comment (user_id,post_id, content, dt_created)
-    values (1,1, 'Awesome!', current_timestamp);
+    values (1, 1, 'Awesome!', current_timestamp);
 insert into comment (user_id,post_id, content, dt_created)
-    values (1,1, 'Excellent!', current_timestamp);
+    values (1, 1, 'Excellent!', current_timestamp);
 insert into comment (user_id,post_id, content, dt_created)
-    values (2,1, 'Wonderful!', current_timestamp);
+    values (2, 1, 'Wonderful!', current_timestamp);
 insert into comment (user_id,post_id, content, dt_created)
-    values (2,3, 'Disgusting!', current_timestamp);
+    values (2, 3, 'Disgusting!', current_timestamp);
 insert into comment (user_id,post_id, content, dt_created)
-    values (2,3, 'Atrocious!', current_timestamp);
+    values (2, 3, 'Atrocious!', current_timestamp);
 
 insert into role (name) values ('Admin');
 insert into role (name) values ('Smurfik');
 insert into role (name) values ('Proxodimec');
-insert into role (name) values ('Phraer');
 
 insert into user_role(user_id, role_id) values (1, 1);
 insert into user_role(user_id, role_id) values (1, 2);
-insert into user_role(user_id, role_id) values (2, 4);
+insert into user_role(user_id, role_id) values (2, 3);
 
 
 

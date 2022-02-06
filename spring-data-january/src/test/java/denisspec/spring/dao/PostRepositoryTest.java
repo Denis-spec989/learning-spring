@@ -2,6 +2,7 @@ package denisspec.spring.dao;
 
 import denisspec.spring.config.DataConfig;
 import denisspec.spring.dao.repository.PostRepository;
+import denisspec.spring.dao.repository.UsermRepository;
 import denisspec.spring.entity.Post;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,9 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.swing.text.html.Option;
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,9 +25,12 @@ public class PostRepositoryTest {
 
     private final PostRepository postRepository;
 
+    private final UsermRepository usermRepository;
+
     @Autowired
-    public PostRepositoryTest(PostRepository postRepository) {
+    public PostRepositoryTest(PostRepository postRepository, UsermRepository usermRepository) {
         this.postRepository = postRepository;
+        this.usermRepository = usermRepository;
     }
 
     @Test
@@ -37,6 +40,7 @@ public class PostRepositoryTest {
         post.setTitle("Day 4");
         post.setContent("All is ok again");
         post.setDtCreated(LocalDateTime.now());
+        post.setUserm(usermRepository.getById(1L));
         postRepository.save(post);
         assertEquals("Day 4", postRepository.findById(4L).get().getTitle());
     }
