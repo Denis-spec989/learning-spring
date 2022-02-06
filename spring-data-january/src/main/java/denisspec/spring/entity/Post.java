@@ -32,7 +32,7 @@ public class Post {
 
     private String content;
     @Column(name="dt_created")
-    private LocalDateTime dtCreated;
+    private LocalDateTime dtCreated = LocalDateTime.now();
     @Column(name="dt_updated")
      private LocalDateTime dtUpdated;
 
