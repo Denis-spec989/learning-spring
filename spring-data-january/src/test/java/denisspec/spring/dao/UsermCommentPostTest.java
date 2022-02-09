@@ -4,8 +4,9 @@ import denisspec.spring.config.DataConfig;
 import denisspec.spring.dao.repository.CommentRepository;
 import denisspec.spring.dao.repository.PostRepository;
 import denisspec.spring.dao.repository.UsermRepository;
-import denisspec.spring.entity.Comment;
-import denisspec.spring.entity.Post;
+import denisspec.spring.service.CommentService;
+import denisspec.spring.service.PostService;
+import denisspec.spring.service.UsermService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,33 +23,24 @@ import static org.junit.jupiter.api.Assertions.*;
 @Transactional
 public class UsermCommentPostTest
 {
-    private final UsermRepository usermRepository;
-    private final CommentRepository commentRepository;
-    private final PostRepository postRepository;
+    private final UsermService usermService;
+    private final PostService postService;
+    private final CommentService commentService;
 
     @Autowired
-    public UsermCommentPostTest(UsermRepository usermRepository, CommentRepository commentRepository, PostRepository postRepository) {
-        this.usermRepository = usermRepository;
-        this.commentRepository = commentRepository;
-        this.postRepository = postRepository;
+    public UsermCommentPostTest( UsermService usermService, PostService postService, CommentService commentService) {
+        this.usermService = usermService;
+        this.postService = postService;
+        this.commentService = commentService;
     }
 
     @Test
     public void CreatePostWithCommentByUser()
     {
-        Post post = new Post();
-        post.setTitle("How to take day off?");
-        post.setContent("Just relax and listen good music.");
-        post.setUserm(usermRepository.findByUsername("Denisspec").get());
-        postRepository.save(post);
-        Comment comment = new Comment();
-        comment.setUserm(usermRepository.findByUsername("AleshaPopovich57").get());
-        comment.setPost(postRepository.findByTitle("How to take day off?").get());
-        comment.setContent("Wonderful advice");
-        commentRepository.save(comment);
-
-        assertEquals("AleshaPopovich57",commentRepository.findByContent("Wonderful advice").get().getUserm().getUsername());
-        assertEquals("Denisspec",commentRepository.findByContent("Wonderful advice").get().getPost().getUserm().getUsername());
+        postService.create("How to take day off?","Just relax and listen good music.","Denisspec");
+        commentService.create("AleshaPopovich57","How to take day off?","Wonderful advice");
+        assertEquals("AleshaPopovich57",commentService.findByContent("Wonderful advice").getUserm().getUsername());
+        assertEquals("Denisspec",commentService.findByContent("Wonderful advice").getPost().getUserm().getUsername());
 
     }
 

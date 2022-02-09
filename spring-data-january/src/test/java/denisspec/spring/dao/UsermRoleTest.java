@@ -6,6 +6,8 @@ import denisspec.spring.dao.repository.RoleRepository;
 import denisspec.spring.dao.repository.UsermRepository;
 import denisspec.spring.entity.Role;
 import denisspec.spring.entity.Userm;
+import denisspec.spring.service.RoleService;
+import denisspec.spring.service.UsermService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,28 +27,24 @@ import java.util.stream.Collectors;
 @Transactional
 public class UsermRoleTest
 {
-    private final UsermRepository usermRepository;
-    private final RoleRepository roleRepository;
+
+    private final UsermService usermService;
+    private final RoleService roleService;
 
     @Autowired
-    public UsermRoleTest(UsermRepository usermRepository, RoleRepository roleRepository) {
-        this.usermRepository = usermRepository;
-        this.roleRepository = roleRepository;
+    public UsermRoleTest( UsermService usermService, RoleService roleService) {
+
+        this.usermService = usermService;
+        this.roleService = roleService;
     }
     @Test
     public void createUsermWithNewRole()
     {
-        Userm userm = new Userm();
-        userm.setUsername("ProAngler");
-        userm.setPassword("Proangler1234R");
-        userm.setFirstName("Maksim");
-        userm.setLastName("Ivanov");
-        usermRepository.save(userm);
-        Role role = new Role();
-        role.setName("Moderator");
-        roleRepository.save(role);
-        usermRepository.findByUsername("ProAngler").get().setRoles(List.of(roleRepository.findByName("Moderator").get()));
-        assertEquals(Set.of("Moderator"),usermRepository.findByUsername("ProAngler").orElseThrow().getRoles().stream().map(Role::getName).collect(Collectors.toSet()));
+        usermService.create("ProAngler","Proangler1234R","Maksim","Ivanov");
+        roleService.create("Moderator");
+        usermService.getByUsername("ProAngler").setRoles(List.of(roleService.getByName("Moderator")));
+        assertEquals(Set.of("Moderator"),usermService.getByUsername("ProAngler").getRoles().stream().map(Role::getName).collect(Collectors.toSet()));
+
     }
 
 

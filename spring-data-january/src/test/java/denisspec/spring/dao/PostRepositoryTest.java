@@ -4,6 +4,7 @@ import denisspec.spring.config.DataConfig;
 import denisspec.spring.dao.repository.PostRepository;
 import denisspec.spring.dao.repository.UsermRepository;
 import denisspec.spring.entity.Post;
+import denisspec.spring.service.PostService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,51 +24,37 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @Transactional
 public class PostRepositoryTest {
 
-    private final PostRepository postRepository;
 
-    private final UsermRepository usermRepository;
+    private final PostService postService;
 
     @Autowired
-    public PostRepositoryTest(PostRepository postRepository, UsermRepository usermRepository) {
-        this.postRepository = postRepository;
-        this.usermRepository = usermRepository;
+    public PostRepositoryTest(PostService postService) {
+        this.postService = postService;
     }
 
     @Test
     void create(){
-        //  Assertions.assertEquals(4,2+2);
-        Post post = new Post();
-        post.setTitle("Day 4");
-        post.setContent("All is ok again");
-        post.setDtCreated(LocalDateTime.now());
-        post.setUserm(usermRepository.getById(1L));
-        postRepository.save(post);
-        assertEquals("Day 4", postRepository.findById(4L).get().getTitle());
+        postService.create("Day 4","All is ok again",1L);
+        assertEquals("Day 4", postService.getById(4L).getTitle());
     }
     @Test
     void update(){
-        //  Assertions.assertEquals(4,2+2);
-        Post post = postRepository.findById(1L).get();
-        post.setTitle("Day 4");
-        post.setDtUpdated(LocalDateTime.now());
-        postRepository.save(post);
-        assertEquals("Day 4", postRepository.findById(1L).get().getTitle());
-        assertNotNull(postRepository.findById(1L).get().getDtUpdated());
+        postService.updateTitleByPostId("Day 4",1L);
+        assertEquals("Day 4",postService.getById(1L).getTitle());
+        assertNotNull(postService.getById(1L).getDtUpdated());
     }
     @Test
     void delete(){
-        postRepository.deleteById(1L);
-        assertEquals(2, postRepository.findAll().size());
+        postService.deleteById(1L);
+        assertEquals(2,postService.getAll().size());
     }
 
     @Test
     void postTagComment()
     {
-        Post post = postRepository.findById(1L).get();
+        Post post = postService.getById(1L);
         assertEquals(3,post.getComments().size());
         assertEquals(2,post.getTags().size());
     }
-
-
 
 }

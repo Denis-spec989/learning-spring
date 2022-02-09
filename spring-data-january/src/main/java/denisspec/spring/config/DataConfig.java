@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan({"denisspec.spring.dao.jdbc","denisspec.spring.dao.jpa"})
+@ComponentScan({"denisspec.spring.dao.jdbc","denisspec.spring.dao.jpa","denisspec.spring.service"})
 @EnableTransactionManagement
 @EnableJpaRepositories("denisspec.spring.dao.repository")
 public class DataConfig {

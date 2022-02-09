@@ -27,7 +27,7 @@
     <loaded-nodes>
       <connection connection-id="15a70231-afcc-4c4d-9b06-d6b20212b95b">
         <schema name="pg_catalog" object-types="table, view, function" />
-        <schema name="public" object-types="table, view, function, column" />
+        <schema name="public" object-types="table, view, function" />
       </connection>
     </loaded-nodes>
   </component>
@@ -80,7 +80,7 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="ab86f23a-331b-482d-8900-249e92e5bc0d" active="true">
+      <connection id="ab86f23a-331b-482d-8900-249e92e5bc0d" active="true" signed="true">
         <database>
           <name value="Connectionpost" />
           <description value="" />
@@ -164,7 +164,7 @@
           <object-name-filters />
         </object-filters>
       </connection>
-      <connection id="15a70231-afcc-4c4d-9b06-d6b20212b95b" active="true">
+      <connection id="15a70231-afcc-4c4d-9b06-d6b20212b95b" active="true" signed="true">
         <database>
           <name value="PgSQL" />
           <description value="" />

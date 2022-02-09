@@ -3,7 +3,9 @@ package denisspec.spring.dao;
 
 import denisspec.spring.config.DataConfig;
 import denisspec.spring.dao.repository.UsermRepository;
+import denisspec.spring.entity.Post;
 import denisspec.spring.entity.Userm;
+import denisspec.spring.service.UsermService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +14,9 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
 
-import java.time.LocalDateTime;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = DataConfig.class)
@@ -22,44 +24,36 @@ import java.time.LocalDateTime;
 @Transactional
 public class UsermRepositoryTest {
 
-    private final UsermRepository usermRepository;
+
+    private final UsermService usermService;
 
     @Autowired
-    public UsermRepositoryTest(UsermRepository usermRepository) {
-        this.usermRepository = usermRepository;
+    public UsermRepositoryTest( UsermService usermService) {
+        this.usermService = usermService;
     }
 
     @Test
     void create()
     {
-        Userm userm = new Userm();
-        userm.setUsername("Marina57");
-        userm.setPassword("1234567");
-        userm.setFirstName("Marina");
-        userm.setLastName("Ignatova");
-        userm.setD_created(LocalDateTime.now());
-        userm.setActive(true);
-        usermRepository.save(userm);
-        assertEquals("Marina57", usermRepository.findById(3L).get().getUsername());
+        usermService.create("Marina57","1234567","Marina","Ignatova");
+        assertEquals("Marina57", usermService.getById(3L).getUsername());
     }
 
     @Test
     void update()
     {
-        Userm userm = usermRepository.findById(1L).get();
-        userm.setPassword("DenisKrasavaR_");
-        userm.setActive(false);
-        usermRepository.save(userm);
-        assertNotEquals("1234R", usermRepository.findById(1L).get().getPassword());
-        assertEquals(false, usermRepository.findById(1L).get().isActive());
+        usermService.updatePassword("Denisspec","DenisKrasavaR_");
+        assertNotEquals("1234R", usermService.getById(1L).getPassword());
     }
 
     @Test
     void delete()
     {
-        usermRepository.deleteById(1L);
-        assertEquals(1,usermRepository.findAll().size());
+        usermService.deleteUser("Denisspec");
+        assertEquals(1,usermService.getAll().size());
     }
+
+
 
 
 
