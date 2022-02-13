@@ -1,0 +1,4 @@
+denisspec\spring\controller\HelloController.class
+denisspec\spring\config\AppInitializer.class
+denisspec\spring\config\MyWebAppInitializer.class
+denisspec\spring\config\WebConfig.class
