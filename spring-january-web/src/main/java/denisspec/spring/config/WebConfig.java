@@ -11,7 +11,7 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 @Configuration
-@ComponentScan({"denisspec.spring.controller"})
+@ComponentScan({"denisspec.spring.service","denisspec.spring.config","denisspec.spring.controller"})
 @EnableWebMvc
 public class WebConfig {
 

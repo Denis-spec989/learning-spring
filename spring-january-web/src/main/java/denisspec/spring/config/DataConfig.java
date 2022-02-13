@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan({"denisspec.spring.entity","denisspec.spring.controller","denisspec.spring.service"})
+@ComponentScan("denisspec.spring.service")
 @EnableTransactionManagement
 @EnableJpaRepositories("denisspec.spring.repository")
 public class DataConfig {

@@ -1,4 +1,16 @@
-denisspec\spring\controller\HelloController.class
+denisspec\spring\repository\CommentRepository.class
+denisspec\spring\entity\Userm.class
+denisspec\spring\repository\PostRepository.class
+denisspec\spring\entity\Comment.class
+denisspec\spring\entity\Tag.class
 denisspec\spring\config\AppInitializer.class
+denisspec\spring\entity\Post.class
+denisspec\spring\repository\UsermRepository.class
+denisspec\spring\repository\RoleRepository.class
+denisspec\spring\controller\HelloController.class
 denisspec\spring\config\MyWebAppInitializer.class
+denisspec\spring\entity\Role.class
+denisspec\spring\config\DataConfig.class
+denisspec\spring\repository\TagRepository.class
+denisspec\spring\controller\PostController.class
 denisspec\spring\config\WebConfig.class
