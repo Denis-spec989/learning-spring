@@ -13,4 +13,5 @@ denisspec\spring\entity\Role.class
 denisspec\spring\config\DataConfig.class
 denisspec\spring\repository\TagRepository.class
 denisspec\spring\controller\PostController.class
+denisspec\spring\service\UsermService.class
 denisspec\spring\config\WebConfig.class

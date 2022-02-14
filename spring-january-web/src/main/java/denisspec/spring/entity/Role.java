@@ -13,7 +13,6 @@ public class Role {
     private String name;
     @ManyToMany(mappedBy = "roles")
     private List<Userm> userm;
-
     public List<Userm> getUserm() {
         return userm;
     }
